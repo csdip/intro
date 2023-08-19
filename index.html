@@ -21,7 +21,7 @@
                             <a href="#" class="logo logo-desktop"><img src="img/logo.svg" alt="logo"></a>
                             <ul>
                                 <li class="drop-down"><a href="#">Features</a>
-                                    <ul>
+                                    <ul class="sub-menu">
                                         <li><a href="#"><img src="img/icon-todo.svg" alt="icon">Todo List</a></li>
                                         <li><a href="#"><img src="img/icon-calendar.svg" alt="icon">Calendar</a></li>
                                         <li><a href="#"><img src="img/icon-reminders.svg" alt="icon">Reminders</a></li>
@@ -29,7 +29,7 @@
                                     </ul>
                                 </li>
                                 <li class="drop-down"><a href="#">Company</a>
-                                    <ul>
+                                    <ul class="sub-menu">
                                         <li><a href="#">History</a></li>
                                         <li><a href="#">Our Team</a></li>
                                         <li><a href="#">Blog</a></li>
@@ -88,6 +88,30 @@
     const navBtn = document.querySelector('.nav-btn')
     const mainMenu = document.querySelector('.main-menu')
     const overlay = document.querySelector('.overlay')
+    const dropdown = document.querySelector('.drop-down')
+
+    dropdown.addEventListener('click', ()=>{
+        if(dropdown.classList.contains('active')){
+            collapseSubMenu();
+            if(mainMenu.querySelector(".drop-down.active")){
+        	collapseSubMenu();
+          }
+        }else{
+          
+            dropdown.classList.add('active');
+            const subMenu= dropdown.querySelector('.sub-menu');
+            subMenu.style.maxHeight = subMenu.scrollHeight + "px";
+        }
+    });
+
+    function collapseSubMenu(){
+  	mainMenu.querySelector(".drop-down.active .sub-menu")
+  	.removeAttribute("style");
+
+
+  	mainMenu.querySelector(".drop-down.active")
+  	.classList.remove("active");
+  }
 
     navBtn.addEventListener('click', ()=>{
         body.classList.toggle('nav-active')
