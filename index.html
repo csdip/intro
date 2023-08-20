@@ -28,7 +28,7 @@
                                         <li><a href="#"><img src="img/icon-planning.svg" alt="icon">Planning</a></li>
                                     </ul>
                                 </li>
-                                <li class="drop-down"><a href="#">Company</a>
+                                <li class="drop-down 2"><a href="#">Company</a>
                                     <ul class="sub-menu">
                                         <li><a href="#">History</a></li>
                                         <li><a href="#">Our Team</a></li>
@@ -84,34 +84,13 @@
 </body>
 
 <script type="text/javascript">
-    const body = document.querySelector('body')
-    const navBtn = document.querySelector('.nav-btn')
-    const mainMenu = document.querySelector('.main-menu')
-    const overlay = document.querySelector('.overlay')
-    const dropdown = document.querySelector('.drop-down')
+    const body = document.querySelector('body');
+    const navBtn = document.querySelector('.nav-btn');
+    const mainMenu = document.querySelector('.main-menu');
+    const overlay = document.querySelector('.overlay');
+    const dropwdownLinks = document.querySelectorAll('.drop-down');
+    const subMenu = document.querySelector('.sub-menu');
 
-    dropdown.addEventListener('click', ()=>{
-        if(dropdown.classList.contains('active')){
-            collapseSubMenu();
-            if(mainMenu.querySelector(".drop-down.active")){
-        	collapseSubMenu();
-          }
-        }else{
-          
-            dropdown.classList.add('active');
-            const subMenu= dropdown.querySelector('.sub-menu');
-            subMenu.style.maxHeight = subMenu.scrollHeight + "px";
-        }
-    });
-
-    function collapseSubMenu(){
-  	mainMenu.querySelector(".drop-down.active .sub-menu")
-  	.removeAttribute("style");
-
-
-  	mainMenu.querySelector(".drop-down.active")
-  	.classList.remove("active");
-  }
 
     navBtn.addEventListener('click', ()=>{
         body.classList.toggle('nav-active')
@@ -119,5 +98,24 @@
         mainMenu.classList.toggle('active')
         overlay.classList.toggle('active')
     })
+    overlay.addEventListener('click', ()=>{
+        mainMenu.classList.remove('active')
+        overlay.classList.remove('active')
+        navBtn.classList.remove('active')
+        body.classList.remove('nav-active')
+    })
+
+    dropwdownLinks.forEach(dropwdownLink =>{
+        dropwdownLink.addEventListener('click', ()=>{
+            resetLinks();
+            dropwdownLink.classList.add('active')
+        })
+        function resetLinks(){
+            dropwdownLinks.forEach(dropwdownLink =>{
+                dropwdownLink.classList.remove('active')
+            })
+        }
+    })
+
 </script>
 </html>
